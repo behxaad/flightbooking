@@ -1,4 +1,6 @@
-package com.Kingflightbooking.services;
+package com.kingflyer.flightbooking.services;
+
+import com.operations.User;
 
 public class UserServiceImplementation implements UserService {
 
@@ -16,6 +18,12 @@ public class UserServiceImplementation implements UserService {
 
 	@Override
 	public boolean modifyUser(User user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteUser(User user) {
 		// TODO Auto-generated method stub
 		return false;
 	}

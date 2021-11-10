@@ -1,4 +1,4 @@
-package com.Kingflightbooking.services;
+package com.kingflyer.flightbooking.services;
 
 import java.util.List;
 

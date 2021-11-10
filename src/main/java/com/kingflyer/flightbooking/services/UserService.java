@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.Kingflightbooking.services;
+package com.kingflyer.flightbooking.services;
 
 
 import com.operations.User;
@@ -15,5 +15,6 @@ public interface UserService {
 	
 	public boolean addUser(User user);
 	public boolean modifyUser(User user);
+	public boolean deleteUser(User user);
 
 }
