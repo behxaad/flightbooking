@@ -1,5 +1,7 @@
 package com.kingflyer.flightbooking.entity;
 
+public class Fleet {
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 

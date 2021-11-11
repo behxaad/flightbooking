@@ -1,5 +1,9 @@
 package com.kingflyer.flightbooking.entity;
 
+
+public class Flight {
+
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -84,5 +88,6 @@ public class Flight {
 	public void setArrivalTime(Date arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
+
 
 }
