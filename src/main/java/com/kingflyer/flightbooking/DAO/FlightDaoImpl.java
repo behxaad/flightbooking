@@ -21,7 +21,7 @@ import com.model.LocationMaster;
 import com.model.Person;
 @Repository
 @Transactional
-public class FlightImpl implements FlightDao {
+public class FlightDaoImpl implements FlightDao {
 	@Autowired
 	private SessionFactory factory;
 	

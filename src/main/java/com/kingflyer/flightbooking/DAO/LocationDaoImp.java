@@ -16,7 +16,7 @@ import com.model.LocationMaster;
 
 @Repository
 @Transactional
-public class LocationImp implements LocationDao{
+public class LocationDaoImp implements LocationDao{
 
 	@Autowired
 	private SessionFactory factory;

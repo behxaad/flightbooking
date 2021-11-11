@@ -14,7 +14,7 @@ import com.kingflyer.flightbooking.entity.Fleet;
 
 @Repository
 @Transactional
-public class FleetImp implements FleetDao{
+public class FleetDaoImp implements FleetDao{
 	@Autowired
 	private SessionFactory factory;
 	
