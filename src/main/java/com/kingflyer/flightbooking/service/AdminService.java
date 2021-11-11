@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.kingflyer.flightbooking.services;
+package com.kingflyer.flightbooking.service;
 
 /**
  * @author pudaykir
