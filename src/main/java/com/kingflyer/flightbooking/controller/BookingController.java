@@ -1,136 +1,63 @@
 package com.kingflyer.flightbooking.controller;
 
 
-import java.util.ArrayList;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.management.AttributeNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.kingflyer.flightbooking.Dao.BookingRepo;
 import com.kingflyer.flightbooking.entity.Booking;
-import com.kingflyer.flightbooking.entity.Flight;
-import com.kingflyer.flightbooking.entity.Passenger;
-import com.kingflyer.flightbooking.entity.Person;
-import com.kingflyer.flightbooking.services.AdminService;
-import com.kingflyer.flightbooking.services.BookingService;
-import com.kingflyer.flightbooking.services.FlightService;
-import com.kingflyer.flightbooking.services.UserService;
 
-//@Controller
+
+
+
+@RestController
+@RequestMapping("/api/user")
 public class BookingController {
+	
 
 	@Autowired
-	private AdminService adminService;
-	@Autowired
-	private BookingService bookingService;
-	@Autowired
-	private FlightService flightService;
-	@Autowired
-	private UserService userService;
+	BookingRepo repo;
 	
-	List<Passenger> passengers=new ArrayList();
-	Booking booking =new Booking();
 	
-	@RequestMapping("/bookTicket")
-	public void flight(HttpServletRequest request,HttpServletResponse response)
-	{
+	@PostMapping("/Book_Ticket")
+	public Booking createbook(@RequestBody Booking user) {
+		//getAllFlight();
+		return this.repo.save(user);
 		
-		//Passenger passenger=new Passenger();
-		Flight flightMaster=new Flight();
-		Passenger passenger=new Passenger();
-		Person person=new Person();
-		person.setPersonId(90001);
-		String flightid=request.getParameter("flightId");
-		String classType=request.getParameter("classType");
-		System.out.println(flightid);
-		String s=request.getParameter("seat");
-		int seat=Integer.parseInt(s);
-		int flightId=Integer.parseInt(flightid);
-		flightMaster.setFlightId(flightId);
-		booking.setBookingId(268943);
-		booking.setSeatClass(classType);
-		booking.setSeatsBooked(seat);
-		booking.setTravelDate(flightMaster.getFlightTravelDate());
-		booking.setBookingNumber("235454");
-		int total=seat*flightService.getFare(flightId, classType);
-		System.out.println(total);
-		booking.setTotalCost(total);
-		booking.setFlightMaster(flightMaster);
-		for(int i=0;i<seat;i++)
-		{
-			String userName=request.getParameter("username"+i);
-			String middleName=request.getParameter("middlename"+i);
-			String lastName=request.getParameter("lastname"+i);
-			String gender=request.getParameter("gender"+i);
-			String mealPreferences=request.getParameter("meal"+i);
-			String passengerType=request.getParameter("passengerType"+i);
-			String age=request.getParameter("age"+i);
-			String passportNumber=request.getParameter("passport"+i);
-			
-			passenger.setPassengerId(6000+1);
-			passenger.setFirstName(userName);
-			passenger.setMiddleName(middleName);
-			passenger.setLastName(lastName);
-			passenger.setGender(gender);
-			passenger.setMealPreferences(mealPreferences);
-			passenger.setPassengerType(passengerType);
-			passenger.setPassportNumber(passportNumber);
-			passenger.setAge(Integer.parseInt(age));
-			passengers.add(passenger);
-		}
-		try
-		{
-		RequestDispatcher requestDispatcher=request.getRequestDispatcher("modeSelect");
-		requestDispatcher.include(request, response);
-		}
-		catch(Exception e)
-		{}
-	}
-	@RequestMapping("modeSelect")
-	public ModelAndView modeSelect(HttpServletRequest request,HttpServletResponse response)
-	{
-		return new ModelAndView("modeSelect");
 	}
 	
-	@RequestMapping("payment")
-	public ModelAndView pay(HttpServletRequest request,HttpServletResponse response)
-	{
-		return new ModelAndView("payment");
-	}
 	
-	@RequestMapping("donePayment")
-	public ModelAndView payed(HttpServletRequest request,HttpServletResponse response)
-	{
-		ModelAndView model=new ModelAndView("donePayment");
-		model.addObject("passenger",passengers);
-		model.addObject("booking",booking);
-		return model;
-	}
 	
-	@RequestMapping("paymentFailure")
-	public ModelAndView fail(HttpServletRequest request,HttpServletResponse response)
-	{
-		return new ModelAndView("modeSelect","msg","Payment Failed try again");
+	@DeleteMapping("/cancel_booking/{book_id}")
+	public String delete(@PathVariable("book_id") int book_id) {
+		Booking p = repo.getOne(book_id);
+		repo.delete(p);
+		return "Deleted User Details";
 	}
-	
-	@RequestMapping("paymentPass")
-	public ModelAndView succ(HttpServletRequest request,HttpServletResponse response)
-	{
 
-		if(bookingService.bookTicket(booking, passengers))
-		{
-			return new ModelAndView("successful","msg","from booking");
-		}
-		else
-		{
-			return new ModelAndView("unsuccessful");
-		}
-	}
+	/* @DeleteMapping("/cancel_booking/{book_id}")
+	    public Map<String, Boolean> deleteEmployee(@PathVariable(value = "book_id") int book_id)
+	         throws AttributeNotFoundException {
+		 Booking  booking = repo.findById(book_id)
+	       .orElseThrow(() -> new AttributeNotFoundException("Booking not found for this id :: " + book_id));
+
+	    	repo.delete(booking);
+	        Map<String, Boolean> response = new HashMap<>();
+	        response.put("deleted", Boolean.TRUE);
+	        return response;
+	    }*/
 }
+

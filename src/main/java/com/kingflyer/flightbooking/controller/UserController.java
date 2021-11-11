@@ -31,11 +31,12 @@ public class UserController {
 	    String password=request.getParameter("password");
 	    Boolean isUser = userService.checkLogin(emailId, password);
 	    if(isUser) {	      	    
-	    	String firstName = (userService.getPerson(emailId)).getFirstName();
-	    	String lastName = userService.getPerson(emailId).getLastName();
+	    	
 	    	request.getSession().setAttribute("emailId", emailId);
-	    	request.getSession().setAttribute("firstName", firstName);
-	    	request.getSession().setAttribute("lastName", lastName);
+	    	Object firstName = null;
+			request.getSession().setAttribute("firstName", firstName);
+	    	Object lastName = null;
+			request.getSession().setAttribute("lastName", lastName);
 	    	System.out.println("Session saved: "+firstName+" "+lastName);	
 	        return new ModelAndView("homepage","message","Logged in successfully!"); 
 	    }

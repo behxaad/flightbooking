@@ -1,16 +1,16 @@
-package com.kingflyer.flightbooking.DAO;
+package com.kingflyer.flightbooking.Dao;
 
 import java.util.List;
 
 import com.kingflyer.flightbooking.entity.Location;
 
-public interface LocationDao{
+public interface LocationDao {
 
-	List<Location> findAll();
+	Object findById(int locid);
 
 	void save(Location location);
 
-	Object findById(int locid);
+	List<Location> findAll();
 
 	void delete(Location location);
 

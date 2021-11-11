@@ -1,4 +1,4 @@
-package com.kingflyer.flightbooking.DAO;
+package com.kingflyer.flightbooking.Dao;
 
 import com.kingflyer.flightbooking.entity.Fare;
 

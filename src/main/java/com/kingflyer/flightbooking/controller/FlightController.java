@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import java.util.ArrayList;
 import com.kingflyer.flightbooking.entity.Flight;
 import com.kingflyer.flightbooking.entity.Location;

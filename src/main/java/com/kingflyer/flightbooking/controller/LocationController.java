@@ -1,4 +1,5 @@
 package com.kingflyer.flightbooking.controller;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.kingflyer.flightbooking.DAO.LocationDao;
+
+import com.kingflyer.flightbooking.Dao.LocationDao;
 import com.kingflyer.flightbooking.entity.Location;
 
 
@@ -45,7 +47,7 @@ public List<Location> getloc() {
 		return location;
 	}
 	
-	@DeleteMapping("/delete_loc/{locid}")
+	/*@DeleteMapping("/delete_loc/{locid}")
     public Map<String, Boolean> deleteEmployee(@PathVariable(value = "locid") int locid)
          throws AttributeNotFoundException {
 		Location  location = 	repo.findById(locid)
@@ -55,6 +57,6 @@ public List<Location> getloc() {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
-    }
+    }*/
 }
 
