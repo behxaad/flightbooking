@@ -8,11 +8,11 @@ public class User {
 	
 	@Id
 	int id;
-	String userName;
-	String password;
-	String firstName;
-	String lastName;
-	String email;
+	private String userName;
+	private String password;
+	private String firstName;
+	private String lastName;
+	private String email;
 	Contact contact;
 	
 	public User(int id, String userName, String password, String firstName, String lastName, String email,
