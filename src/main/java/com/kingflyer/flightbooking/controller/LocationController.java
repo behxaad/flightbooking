@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.kingflyer.flightbooking.DAO.LocationDao;
+import com.kingflyer.flightbooking.dao.LocationDao;
 import com.kingflyer.flightbooking.entity.Location;
 
 

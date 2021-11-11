@@ -1,7 +1,5 @@
 package com.kingflyer.flightbooking.entity;
 
-public class Fare {
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 

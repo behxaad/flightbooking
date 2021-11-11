@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.kingflyer.flightbooking.DAO.FareDao;
+import com.kingflyer.flightbooking.dao.FareDao;
 import com.kingflyer.flightbooking.entity.Fare;
 
 @RestController

@@ -1,9 +1,5 @@
 package com.kingflyer.flightbooking.entity;
 
-
-public class Location {
-
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 

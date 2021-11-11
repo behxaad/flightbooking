@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.kingflyer.flightbooking.DAO.BookingDao;
+import com.kingflyer.flightbooking.dao.BookingDao;
 import com.kingflyer.flightbooking.entity.Booking;
 @RestController
 @RequestMapping("/api/user")

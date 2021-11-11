@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.kingflyer.flightbooking.DAO.FleetDao;
+import com.kingflyer.flightbooking.dao.FleetDao;
 import com.kingflyer.flightbooking.entity.Fleet;
 
 	@RestController

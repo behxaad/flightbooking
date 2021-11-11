@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kingflyer.flightbooking.DAO.FareDao;
+import com.kingflyer.flightbooking.dao.FareDao;
 
-import com.kingflyer.flightbooking.DAO.FlightDao;
+import com.kingflyer.flightbooking.dao.FlightDao;
 
 import com.kingflyer.flightbooking.entity.Flight;
 
