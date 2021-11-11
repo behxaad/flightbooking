@@ -1,5 +1,7 @@
 package com.kingflyer.flightbooking.DAO;
 
+
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,23 +15,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dao.FlightMasterDAO;
+
 import com.kingflyer.flightbooking.entity.Flight;
 import com.kingflyer.flightbooking.entity.Location;
-import com.model.FlightMaster;
-import com.model.LocationMaster;
-import com.model.Person;
+
 @Repository
 @Transactional
-public class FlightDaoImpl implements FlightDao {
+public class FlightDaoImp implements FlightDao {
 	@Autowired
 	private SessionFactory factory;
 	
-	public boolean newFlight(Flight flight) {
+	public boolean newFlight(Flight flightMaster) {
 		Session session = factory.getCurrentSession();
 		try
 		{
-		session.save(flight);
+		session.save(flightMaster);
 		return true;
 		}
 		catch(RuntimeException e)
@@ -39,7 +39,7 @@ public class FlightDaoImpl implements FlightDao {
 	}
 
 	
-	public List<FlightMaster> searchFlight(Location sourceLocation, Location destinationLocation, Date travelDate) {
+	public List<Flight> searchFlight(Location sourceLocation, Location destinationLocation, Date travelDate) {
 
 		Session session = factory.getCurrentSession();
 		List<Flight> flightMaster=new ArrayList<Flight>();

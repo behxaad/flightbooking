@@ -1,43 +1,49 @@
 package com.kingflyer.flightbooking.DAO;
 
+
 import java.util.ArrayList;
-
-
 import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.kingflyer.flightbooking.entity.Fare;
 
 
 @Repository
 @Transactional
-import com.kingflyer.flightbooking.Dao.FareDao;
-import com.kingflyer.flightbooking.entity.Fare;
-
-public class FareDaoimp implements FareDao {
+public class FareDaoImp implements FareDao {
 
 	@Autowired
 	private SessionFactory factory;
-	@Override
-	public boolean newFare(Fare fare) {
+
+	
+	public boolean newFare(Fare fareMaster) {
 		Session session = factory.getCurrentSession();
 		try {
-			session.save(fare);
+			session.save(fareMaster);
 			return true;
 		} catch (RuntimeException e) {
 			return false;
 		}
 	}
 
-	@Override
-	public boolean modifyFare(Fare fare) {
+	
+	public boolean modifyFare(Fare fareMaster) {
 		Session session = factory.getCurrentSession();
 		try {
-			session.update(fare);
+			session.update(fareMaster);
 			return true;
 		} catch (RuntimeException e) {
 			return false;
 		}
 	}
 
-	@Override
+	
 	public boolean deleteFare(int fareId) {
 		Session session = factory.getCurrentSession();
 		try {
@@ -49,7 +55,7 @@ public class FareDaoimp implements FareDao {
 		}
 	}
 
-	@Override
+	
 	public Fare getFare(int fareMasterId) {
 		Session session = factory.getCurrentSession();
 		Fare fareMaster = new Fare();
@@ -61,7 +67,7 @@ public class FareDaoimp implements FareDao {
 		}
 	}
 
-	@Override
+	
 	public List<Fare> getAllFareList() {
 		Session session = factory.getCurrentSession();
 		List<Fare> fareMasterList = new ArrayList<Fare>();

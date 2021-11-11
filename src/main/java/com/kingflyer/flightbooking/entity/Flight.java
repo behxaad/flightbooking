@@ -61,11 +61,11 @@ public class Flight {
 		this.fleet = fleet;
 	}
 
-	public FlightStatus getStatus() {
+	public Flight getStatus() {
 		return status;
 	}
 
-	public void setStatus(FlightStatus status) {
+	public void setStatus(Flight status) {
 		this.status = status;
 	}
 

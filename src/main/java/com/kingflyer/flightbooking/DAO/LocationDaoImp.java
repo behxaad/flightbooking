@@ -1,5 +1,7 @@
 package com.kingflyer.flightbooking.DAO;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dao.LocationMasterDAO;
+
 import com.kingflyer.flightbooking.entity.Location;
-import com.model.LocationMaster;
+
 
 @Repository
 @Transactional
-public class LocationDaoImp implements LocationDao{
+public class LocationDaoImp implements LocationDao {
 
 	@Autowired
 	private SessionFactory factory;

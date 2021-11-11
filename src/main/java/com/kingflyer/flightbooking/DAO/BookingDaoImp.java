@@ -1,21 +1,27 @@
 package com.kingflyer.flightbooking.DAO;
 
+
 import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kingflyer.flightbooking.entity.Booking;
 import com.kingflyer.flightbooking.entity.User;
 
 
+
 @Repository
 @Transactional
 public class BookingDaoImp implements BookingDao {
-
 	
 	@Autowired
 	private SessionFactory factory;
-	
 	public boolean newBooking(Booking booking) {
-
 		Session session = factory.getCurrentSession();
 		try
 		{
@@ -28,15 +34,15 @@ public class BookingDaoImp implements BookingDao {
 		}
 	}
 
-	@Override
 	public List<Booking> getBookedDetails(int personId) {
-      Session session=factory.getCurrentSession();
+		
+		Session session=factory.getCurrentSession();
 		
 		try
 		{
 			List<Booking> bookingList;
 			session.beginTransaction().commit();
-			String sql_query="from Booking WHERE User="+userId;
+			String sql_query="from Booking WHERE person="+personId;
 			bookingList=session.createQuery(sql_query).list();
 			return bookingList;
 		}
@@ -45,8 +51,6 @@ public class BookingDaoImp implements BookingDao {
 			return null;
 		}
 	}
-
-	@Override
 	public boolean deleteBooking(int bookingId) {
 		Session session = factory.getCurrentSession();
 		try
@@ -59,9 +63,7 @@ public class BookingDaoImp implements BookingDao {
 		{
 			return false;
 		}
-	}
-
-	@Override
+}
 	public Booking getBooking(int bookingId) {
 		Booking booking=new Booking();
 		Session session = factory.getCurrentSession();
@@ -77,5 +79,4 @@ public class BookingDaoImp implements BookingDao {
 			return booking;
 		}
 	}
-
 }

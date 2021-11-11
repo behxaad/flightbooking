@@ -1,5 +1,7 @@
 package com.kingflyer.flightbooking.DAO;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dao.PassengerDAO;
-import com.model.AddressDetail;
-import com.model.Passenger;
+import com.kingflyer.flightbooking.entity.Passenger;
+
+
 @Repository
 @Transactional
 public class PassengerDaoImp implements PassengerDao {

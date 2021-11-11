@@ -1,11 +1,21 @@
 package com.kingflyer.flightbooking.DAO;
 
+
+
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.Query;
+import javax.persistence.Query;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kingflyer.flightbooking.entity.Contact;
-
 
 @Repository
 @Transactional
@@ -13,6 +23,7 @@ public class ContactDaoImp implements ContactDao {
 
 	@Autowired
 	private SessionFactory factory;
+
 	public boolean modifyAddress(Contact addressDetail) {
 		Session session = factory.getCurrentSession();
 		try {
@@ -23,10 +34,8 @@ public class ContactDaoImp implements ContactDao {
 		} catch (RuntimeException e) {
 			return false;
 		}
-		
 	}
 
-	@Override
 	public boolean addNewAddress(Contact addressDetail) {
 		Session session = factory.getCurrentSession();
 		try {
@@ -37,7 +46,6 @@ public class ContactDaoImp implements ContactDao {
 		}
 	}
 
-	@Override
 	public List<Contact> getAddressList(int personId) {
 		Session session = factory.getCurrentSession();
 		List<Contact> addressDetailList = new ArrayList<Contact>();
@@ -50,7 +58,6 @@ public class ContactDaoImp implements ContactDao {
 		}
 	}
 
-	@Override
 	public boolean deleteAddress(int addressId) {
 		Session session = factory.getCurrentSession();
 		try {
@@ -61,6 +68,7 @@ public class ContactDaoImp implements ContactDao {
 		} catch (RuntimeException e) {
 			return false;
 		}
+
 	}
 
 }

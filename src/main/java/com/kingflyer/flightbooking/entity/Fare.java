@@ -20,6 +20,16 @@ public class Fare {
 		this.businessFare = businessFare;
 	}
 
+	
+
+	/**
+	 * 
+	 */
+	public Fare() {
+	}
+
+
+
 	public int getId() {
 		return id;
 	}
