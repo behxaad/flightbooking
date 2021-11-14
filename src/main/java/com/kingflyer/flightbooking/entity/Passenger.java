@@ -1,7 +1,11 @@
 package com.kingflyer.flightbooking.entity;
 
-public class Passenger {
+import java.io.Serializable;
 
+public class Passenger implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private String firstName;
 	private String lastName;
@@ -9,18 +13,6 @@ public class Passenger {
 	private char gender;
 	private String passportNo;
 	private String mealPref;
-
-	public Passenger(int id, String firstName, String lastName, int age, char gender, String passportNo,
-			String mealPref) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.age = age;
-		this.gender = gender;
-		this.passportNo = passportNo;
-		this.mealPref = mealPref;
-	}
 
 	public int getId() {
 		return id;

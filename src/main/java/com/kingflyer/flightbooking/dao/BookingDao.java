@@ -1,15 +1,14 @@
 package com.kingflyer.flightbooking.dao;
 
+import java.util.List;
+
 import com.kingflyer.flightbooking.entity.Booking;
 
 public interface BookingDao{
 
-	void delete(Booking booking);
-
-	Object findById(int book_id);
-
-	Booking save(Booking user);
-
-	Booking getOne(int book_id);
+	public boolean createBooking(Booking booking);
+	public boolean deleteBooking(int bookingId);
+	public Booking getBooking(int bookingId);
+	public List<Booking> getBookedDetails(int userId);
 
 }

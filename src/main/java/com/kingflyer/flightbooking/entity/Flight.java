@@ -1,33 +1,35 @@
 package com.kingflyer.flightbooking.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Flight {
+public class Flight implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private int id;
-	private String departureLocation;
-	private String arrivalLocation;
+	@ManyToOne
+	private Location departureLocation;
+	@ManyToOne
+	private Location arrivalLocation;
+	@OneToOne
 	private Fleet fleet;
-	private FlightStatus status;
+	private int remainingEconomySeats;
+	private int remainingPremiumSeats;
+	private int remainingBusinessSeats;
 	private Date departureTime;
 	private Date arrivalTime;
-
-	public Flight(int id, String departureLocation, String arrivalLocation, Fleet fleet, FlightStatus status,
-			Date departureTime, Date arrivalTime) {
-		super();
-		this.id = id;
-		this.departureLocation = departureLocation;
-		this.arrivalLocation = arrivalLocation;
-		this.fleet = fleet;
-		this.status = status;
-		this.departureTime = departureTime;
-		this.arrivalTime = arrivalTime;
-	}
+	@OneToMany(mappedBy = "flightBooked")
+	private Booking booking;
+	@OneToOne
+	private Fare fare;
 
 	public int getId() {
 		return id;
@@ -37,19 +39,19 @@ public class Flight {
 		this.id = id;
 	}
 
-	public String getDepartureLocation() {
+	public Location getDepartureLocation() {
 		return departureLocation;
 	}
 
-	public void setDepartureLocation(String departureLocation) {
+	public void setDepartureLocation(Location departureLocation) {
 		this.departureLocation = departureLocation;
 	}
 
-	public String getArrivalLocation() {
+	public Location getArrivalLocation() {
 		return arrivalLocation;
 	}
 
-	public void setArrivalLocation(String arrivalLocation) {
+	public void setArrivalLocation(Location arrivalLocation) {
 		this.arrivalLocation = arrivalLocation;
 	}
 
@@ -61,12 +63,28 @@ public class Flight {
 		this.fleet = fleet;
 	}
 
-	public FlightStatus getStatus() {
-		return status;
+	public int getRemainingEconomySeats() {
+		return remainingEconomySeats;
 	}
 
-	public void setStatus(FlightStatus status) {
-		this.status = status;
+	public void setRemainingEconomySeats(int remainingEconomySeats) {
+		this.remainingEconomySeats = remainingEconomySeats;
+	}
+
+	public int getRemainingPremiumSeats() {
+		return remainingPremiumSeats;
+	}
+
+	public void setRemainingPremiumSeats(int remainingPremiumSeats) {
+		this.remainingPremiumSeats = remainingPremiumSeats;
+	}
+
+	public int getRemainingBusinessSeats() {
+		return remainingBusinessSeats;
+	}
+
+	public void setRemainingBusinessSeats(int remainingBusinessSeats) {
+		this.remainingBusinessSeats = remainingBusinessSeats;
 	}
 
 	public Date getDepartureTime() {
@@ -83,6 +101,22 @@ public class Flight {
 
 	public void setArrivalTime(Date arrivalTime) {
 		this.arrivalTime = arrivalTime;
+	}
+
+	public Booking getBooking() {
+		return booking;
+	}
+
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
+
+	public Fare getFare() {
+		return fare;
+	}
+
+	public void setFare(Fare fare) {
+		this.fare = fare;
 	}
 
 }

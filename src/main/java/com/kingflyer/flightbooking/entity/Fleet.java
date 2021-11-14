@@ -1,10 +1,14 @@
 package com.kingflyer.flightbooking.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Fleet {
+public class Fleet implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private int id;
@@ -13,17 +17,8 @@ public class Fleet {
 	private int totalEconomySeats;
 	private int totalPremiumSeats;
 	private int totalBusinessSeats;
-
-	public Fleet(int id, String code, String model, int totalEconomySeats, int totalPremiumSeats,
-			int totalBusinessSeats) {
-		super();
-		this.id = id;
-		this.code = code;
-		this.model = model;
-		this.totalEconomySeats = totalEconomySeats;
-		this.totalPremiumSeats = totalPremiumSeats;
-		this.totalBusinessSeats = totalBusinessSeats;
-	}
+	@OneToOne
+	private Flight flight;
 
 	public int getId() {
 		return id;
@@ -71,6 +66,14 @@ public class Fleet {
 
 	public void setTotalBusinessSeats(int totalBusinessSeats) {
 		this.totalBusinessSeats = totalBusinessSeats;
+	}
+
+	public Flight getFlight() {
+		return flight;
+	}
+
+	public void setFlight(Flight flight) {
+		this.flight = flight;
 	}
 
 }

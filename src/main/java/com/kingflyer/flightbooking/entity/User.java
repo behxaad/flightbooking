@@ -1,11 +1,15 @@
 package com.kingflyer.flightbooking.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
-public class User {
-	
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	int id;
 	private String userName;
@@ -13,19 +17,8 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String email;
-	Contact contact;
-	
-	public User(int id, String userName, String password, String firstName, String lastName, String email,
-			Contact contact) {
-		super();
-		this.id = id;
-		this.userName = userName;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.contact = contact;
-	}
+	@OneToOne
+	private Contact contact;
 
 	public int getId() {
 		return id;
@@ -82,15 +75,5 @@ public class User {
 	public void setContact(Contact contact) {
 		this.contact = contact;
 	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + "]";
-	}
-	
-	
-	
-	
 
 }

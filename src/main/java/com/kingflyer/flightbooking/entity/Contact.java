@@ -1,28 +1,22 @@
 package com.kingflyer.flightbooking.entity;
 
-public class Contact {
-	
-	int id;
-	String type;
-	String addressLine;
-	long zipCode;
-	String city;
-	String state;
-	String country;
-	long mobileNo;
-	
-	public Contact(int id, String type, String addressLine, long zipCode, String city, String state, String country,
-			long mobileNo) {
-		super();
-		this.id = id;
-		this.type = type;
-		this.addressLine = addressLine;
-		this.zipCode = zipCode;
-		this.city = city;
-		this.state = state;
-		this.country = country;
-		this.mobileNo = mobileNo;
-	}
+import java.io.Serializable;
+
+import javax.persistence.OneToOne;
+
+public class Contact implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	private int id;
+	private String type;
+	private String addressLine;
+	private long zipCode;
+	private String city;
+	private String state;
+	private String country;
+	private long mobileNo;
+	@OneToOne
+	private User user;
 
 	public int getId() {
 		return id;
@@ -88,14 +82,12 @@ public class Contact {
 		this.mobileNo = mobileNo;
 	}
 
-	@Override
-	public String toString() {
-		return "Contact [id=" + id + ", type=" + type + ", addressLine=" + addressLine + ", zipCode=" + zipCode
-				+ ", city=" + city + ", state=" + state + ", country=" + country + ", mobileNo=" + mobileNo + "]";
+	public User getUser() {
+		return user;
 	}
-	
-	
-	
-	
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 }

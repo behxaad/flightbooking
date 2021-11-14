@@ -1,24 +1,22 @@
 package com.kingflyer.flightbooking.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Fare {
+public class Fare implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private int id;
 	private double economyFare;
 	private double premiumFare;
 	private double businessFare;
-
-	public Fare(int id, double economyFare, double premiumFare, double businessFare) {
-		super();
-		this.id = id;
-		this.economyFare = economyFare;
-		this.premiumFare = premiumFare;
-		this.businessFare = businessFare;
-	}
+	@OneToOne
+	private Flight flight;
 
 	public int getId() {
 		return id;
@@ -50,6 +48,14 @@ public class Fare {
 
 	public void setBusinessFare(double businessFare) {
 		this.businessFare = businessFare;
+	}
+
+	public Flight getFlight() {
+		return flight;
+	}
+
+	public void setFlight(Flight flight) {
+		this.flight = flight;
 	}
 
 }

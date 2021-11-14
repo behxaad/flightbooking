@@ -1,12 +1,15 @@
 package com.kingflyer.flightbooking.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Booking {
+public class Booking implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private int id;
@@ -14,18 +17,8 @@ public class Booking {
 	private Date bookingDate;
 	private Date travelDate;
 	private double totalCost;
+	@ManyToOne
 	private Flight flightBooked;
-
-	public Booking(int id, long bookingNumber, Date bookingDate, Date travelDate, double totalCost,
-			Flight flightBooked) {
-		super();
-		this.id = id;
-		this.bookingNumber = bookingNumber;
-		this.bookingDate = bookingDate;
-		this.travelDate = travelDate;
-		this.totalCost = totalCost;
-		this.flightBooked = flightBooked;
-	}
 
 	public int getId() {
 		return id;

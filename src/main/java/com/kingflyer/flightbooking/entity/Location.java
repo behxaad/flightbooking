@@ -1,10 +1,15 @@
 package com.kingflyer.flightbooking.entity;
 
+import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Location {
+public class Location implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	private int id;
@@ -12,15 +17,10 @@ public class Location {
 	private String code;
 	private String country;
 	private String airportName;
-
-	public Location(int id, String name, String code, String country, String airportName) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.code = code;
-		this.country = country;
-		this.airportName = airportName;
-	}
+	@OneToMany(mappedBy = "departureLocation")
+	private List<Flight> departure;
+	@OneToMany(mappedBy = "arrivalLocation")
+	private List<Flight> arrival;
 
 	public int getId() {
 		return id;
@@ -60,6 +60,22 @@ public class Location {
 
 	public void setAirportName(String airportName) {
 		this.airportName = airportName;
+	}
+
+	public List<Flight> getDeparture() {
+		return departure;
+	}
+
+	public void setDeparture(List<Flight> departure) {
+		this.departure = departure;
+	}
+
+	public List<Flight> getArrival() {
+		return arrival;
+	}
+
+	public void setArrival(List<Flight> arrival) {
+		this.arrival = arrival;
 	}
 
 }

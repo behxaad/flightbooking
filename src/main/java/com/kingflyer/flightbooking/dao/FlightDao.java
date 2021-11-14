@@ -1,19 +1,16 @@
 package com.kingflyer.flightbooking.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.kingflyer.flightbooking.entity.Flight;
+import com.kingflyer.flightbooking.entity.Location;
 
 public interface FlightDao {
-
-	List<Flight> findAll();
-
-	Object findById(int flightId);
-
-	com.kingflyer.flightbooking.entity.Flight save(com.kingflyer.flightbooking.entity.Flight flight);
-
-	void delete(Flight flight);
-
-	Flight getOne(int flightId);
+	
+	public boolean createFlight(Flight flight);
+	public List<Flight> searchFlight(Location departureLocation, Location arrivalLocation, Date travelDate);
+	public Flight getFlight(int flightId);
+	public List<Flight> getAllFlight();
 
 }

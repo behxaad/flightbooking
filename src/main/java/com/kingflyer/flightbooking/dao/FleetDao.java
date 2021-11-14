@@ -2,20 +2,14 @@ package com.kingflyer.flightbooking.dao;
 
 import java.util.List;
 
-import com.kingflyer.flightbooking.entity.Fare;
 import com.kingflyer.flightbooking.entity.Fleet;
-import com.kingflyer.flightbooking.entity.Flight;
+
 
 public interface FleetDao{
 
-	List<Fleet> findAll();
-
-	Fleet save(Fleet fleet);
-
-	void delete(Fleet p);
-
-	Fleet getOne(int flightId);
-
-	
-
+	public boolean createFleet(Fleet fleetMaster);
+	public boolean modifyFleet(Fleet fleetMaster);
+	public boolean deleteFleet(int fleetId);
+	public Fleet getFleet(int fleetId);
+	public List<Fleet> getAllFleet();
 }
