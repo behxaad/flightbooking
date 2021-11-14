@@ -11,6 +11,7 @@ public interface FlightDao {
 	public boolean createFlight(Flight flight);
 	public List<Flight> searchFlight(Location departureLocation, Location arrivalLocation, Date travelDate);
 	public Flight getFlight(int flightId);
+	public boolean updateRemainingSeats(int flightId);
 	public List<Flight> getAllFlight();
 
 }

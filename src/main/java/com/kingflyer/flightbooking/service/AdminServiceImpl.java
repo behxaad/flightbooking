@@ -14,7 +14,7 @@ import com.kingflyer.flightbooking.entity.Flight;
 import com.kingflyer.flightbooking.entity.Location;
 
 public class AdminServiceImpl implements AdminService {
-	
+
 	@Autowired
 	private FlightDao flightDao;
 	@Autowired
@@ -27,79 +27,85 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public boolean addFlight(Flight flight) {
 		// TODO Auto-generated method stub
-		return false;
+		return flightDao.createFlight(flight);
 	}
 
 	@Override
-	public boolean deleteFlight(Flight flight) {
+	public boolean deleteFlight(int flightId) {
 		// TODO Auto-generated method stub
-		return false;
+		return flightDao.updateRemainingSeats(flightId);
 	}
 
 	@Override
 	public List<Flight> getAllFlights() {
 		// TODO Auto-generated method stub
-		return null;
+		return flightDao.getAllFlight();
 	}
 
 	@Override
 	public boolean addFleet(Fleet fleet) {
 		// TODO Auto-generated method stub
-		return false;
+		return fleetDao.createFleet(fleet);
 	}
 
 	@Override
 	public boolean modifyFleet(Fleet fleet) {
 		// TODO Auto-generated method stub
-		return false;
+		return fleetDao.modifyFleet(fleet);
 	}
 
 	@Override
-	public boolean deleteFleet(Fleet fleet) {
+	public boolean deleteFleet(int fleetId) {
 		// TODO Auto-generated method stub
-		return false;
+		return fleetDao.deleteFleet(fleetId);
 	}
 
 	@Override
 	public List<Fleet> getAllFleets() {
 		// TODO Auto-generated method stub
-		return null;
+		return fleetDao.getAllFleet();
+	}
+
+	@Override
+	public boolean addfare(Fare fare) {
+		// TODO Auto-generated method stub
+		return fareDao.createFare(fare);
 	}
 
 	@Override
 	public boolean modifyFare(Fare fare) {
 		// TODO Auto-generated method stub
-		return false;
+		return fareDao.modifyFare(fare);
 	}
 
 	@Override
 	public List<Fare> getAllFares(Fare fare) {
 		// TODO Auto-generated method stub
-		return null;
+		return fareDao.getAllFare();
 	}
 
 	@Override
 	public boolean addLocation(Location location) {
 		// TODO Auto-generated method stub
-		return false;
+		return locationDao.createLocation(location);
 	}
 
 	@Override
 	public boolean modifyLocation(Location location) {
 		// TODO Auto-generated method stub
-		return false;
+		return locationDao.modifyLocation(location);
 	}
 
 	@Override
-	public boolean deleteLocation(Location location) {
+	public boolean deleteLocation(int locationId) {
 		// TODO Auto-generated method stub
-		return false;
+		return locationDao.deleteLocation(locationId);
 	}
 
 	@Override
 	public List<Location> getAllLocations() {
 		// TODO Auto-generated method stub
-		return null;
+		return locationDao.getAllLocation();
 	}
 
 }
