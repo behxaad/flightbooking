@@ -17,8 +17,6 @@ public class Fleet implements Serializable {
 	private int totalEconomySeats;
 	private int totalPremiumSeats;
 	private int totalBusinessSeats;
-	@OneToOne
-	private Flight flight;
 
 	public int getId() {
 		return id;
@@ -66,14 +64,6 @@ public class Fleet implements Serializable {
 
 	public void setTotalBusinessSeats(int totalBusinessSeats) {
 		this.totalBusinessSeats = totalBusinessSeats;
-	}
-
-	public Flight getFlight() {
-		return flight;
-	}
-
-	public void setFlight(Flight flight) {
-		this.flight = flight;
 	}
 
 }

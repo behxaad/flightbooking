@@ -19,6 +19,7 @@ public class Booking implements Serializable {
 	private double totalCost;
 	private int seatsBooked;
 	private String seatClass;
+
 	@ManyToOne
 	private Flight flightBooked;
 
@@ -61,8 +62,6 @@ public class Booking implements Serializable {
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}
-	
-	
 
 	public int getSeatsBooked() {
 		return seatsBooked;
@@ -80,6 +79,11 @@ public class Booking implements Serializable {
 		this.seatClass = seatClass;
 	}
 
+	@Override
+	public String toString() {
+		return "Booking [id=" + id + ", bookingNumber=" + bookingNumber + ", totalCost=" + totalCost + "]";
+	}
+
 	public Flight getFlightBooked() {
 		return flightBooked;
 	}
@@ -87,9 +91,6 @@ public class Booking implements Serializable {
 	public void setFlightBooked(Flight flightBooked) {
 		this.flightBooked = flightBooked;
 	}
-
-	@Override
-	public String toString() {
-		return "Booking [id=" + id + ", bookingNumber=" + bookingNumber + ", totalCost=" + totalCost + "]";
-	}
+	
+	
 }

@@ -17,10 +17,6 @@ public class Location implements Serializable {
 	private String code;
 	private String country;
 	private String airportName;
-	@OneToMany(mappedBy = "departureLocation")
-	private List<Flight> departure;
-	@OneToMany(mappedBy = "arrivalLocation")
-	private List<Flight> arrival;
 
 	public int getId() {
 		return id;
@@ -60,22 +56,6 @@ public class Location implements Serializable {
 
 	public void setAirportName(String airportName) {
 		this.airportName = airportName;
-	}
-
-	public List<Flight> getDeparture() {
-		return departure;
-	}
-
-	public void setDeparture(List<Flight> departure) {
-		this.departure = departure;
-	}
-
-	public List<Flight> getArrival() {
-		return arrival;
-	}
-
-	public void setArrival(List<Flight> arrival) {
-		this.arrival = arrival;
 	}
 
 }

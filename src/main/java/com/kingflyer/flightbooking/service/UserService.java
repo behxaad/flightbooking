@@ -3,9 +3,6 @@ package com.kingflyer.flightbooking.service;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-
-import com.kingflyer.flightbooking.entity.Contact;
 import com.kingflyer.flightbooking.entity.User;
 
 public interface UserService {

@@ -3,8 +3,10 @@ package com.kingflyer.flightbooking.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -15,20 +17,22 @@ public class Flight implements Serializable {
 
 	@Id
 	private int id;
-//	@ManyToOne
+	@ManyToOne(targetEntity = Location.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="departureId", referencedColumnName = "id")
 	private Location departureLocation;
-//	@ManyToOne
+	@ManyToOne(targetEntity = Location.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="arrivalId", referencedColumnName = "id")
 	private Location arrivalLocation;
-	@OneToOne
+	@OneToOne(targetEntity = Fleet.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="fleetId",referencedColumnName="id")
 	private Fleet fleet;
 	private int remainingEconomySeats;
 	private int remainingPremiumSeats;
 	private int remainingBusinessSeats;
 	private Date departureTime;
 	private Date arrivalTime;
-//	@OneToMany(mappedBy = "flightBooked")
-	private Booking booking;
-	@OneToOne
+	@OneToOne(targetEntity = Fare.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="fareId",referencedColumnName="id")
 	private Fare fare;
 
 	public int getId() {
@@ -103,14 +107,6 @@ public class Flight implements Serializable {
 		this.arrivalTime = arrivalTime;
 	}
 
-	public Booking getBooking() {
-		return booking;
-	}
-
-	public void setBooking(Booking booking) {
-		this.booking = booking;
-	}
-
 	public Fare getFare() {
 		return fare;
 	}
@@ -118,5 +114,7 @@ public class Flight implements Serializable {
 	public void setFare(Fare fare) {
 		this.fare = fare;
 	}
+	
+	
 
 }

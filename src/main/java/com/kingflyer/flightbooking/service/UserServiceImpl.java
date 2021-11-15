@@ -7,9 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kingflyer.flightbooking.dao.ContactDao;
 import com.kingflyer.flightbooking.dao.UserDao;
-import com.kingflyer.flightbooking.entity.Contact;
 import com.kingflyer.flightbooking.entity.User;
 import com.kingflyer.flightbooking.exceptions.RecordAlreadyPresentException;
 import com.kingflyer.flightbooking.exceptions.RecordNotFoundException;

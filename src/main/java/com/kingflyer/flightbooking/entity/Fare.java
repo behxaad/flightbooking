@@ -15,8 +15,6 @@ public class Fare implements Serializable {
 	private double economyFare;
 	private double premiumFare;
 	private double businessFare;
-	@OneToOne
-	private Flight flight;
 
 	public int getId() {
 		return id;
@@ -48,14 +46,6 @@ public class Fare implements Serializable {
 
 	public void setBusinessFare(double businessFare) {
 		this.businessFare = businessFare;
-	}
-
-	public Flight getFlight() {
-		return flight;
-	}
-
-	public void setFlight(Flight flight) {
-		this.flight = flight;
 	}
 
 }
