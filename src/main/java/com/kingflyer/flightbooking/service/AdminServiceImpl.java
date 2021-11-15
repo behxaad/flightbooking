@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.kingflyer.flightbooking.dao.FareDao;
 import com.kingflyer.flightbooking.dao.FleetDao;
@@ -18,6 +19,7 @@ import com.kingflyer.flightbooking.entity.Location;
 import com.kingflyer.flightbooking.exceptions.RecordAlreadyPresentException;
 import com.kingflyer.flightbooking.exceptions.RecordNotFoundException;
 
+@Service
 public class AdminServiceImpl implements AdminService {
 
 	@Autowired

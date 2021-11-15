@@ -15,9 +15,9 @@ public class Flight implements Serializable {
 
 	@Id
 	private int id;
-	@ManyToOne
+//	@ManyToOne
 	private Location departureLocation;
-	@ManyToOne
+//	@ManyToOne
 	private Location arrivalLocation;
 	@OneToOne
 	private Fleet fleet;
@@ -26,7 +26,7 @@ public class Flight implements Serializable {
 	private int remainingBusinessSeats;
 	private Date departureTime;
 	private Date arrivalTime;
-	@OneToMany(mappedBy = "flightBooked")
+//	@OneToMany(mappedBy = "flightBooked")
 	private Booking booking;
 	@OneToOne
 	private Fare fare;

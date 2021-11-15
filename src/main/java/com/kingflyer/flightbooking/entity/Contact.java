@@ -2,11 +2,16 @@ package com.kingflyer.flightbooking.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+@Entity
 public class Contact implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
 	private int id;
 	private String type;
 	private String addressLine;
@@ -15,8 +20,6 @@ public class Contact implements Serializable {
 	private String state;
 	private String country;
 	private long mobileNo;
-	@OneToOne
-	private User user;
 
 	public int getId() {
 		return id;
@@ -80,14 +83,6 @@ public class Contact implements Serializable {
 
 	public void setMobileNo(long mobileNo) {
 		this.mobileNo = mobileNo;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 }

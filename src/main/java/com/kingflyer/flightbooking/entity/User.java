@@ -2,11 +2,16 @@ package com.kingflyer.flightbooking.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="users")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -16,8 +21,10 @@ public class User implements Serializable {
 	private String password;
 	private String firstName;
 	private String lastName;
+	@Column(name="email")
 	private String email;
-	@OneToOne
+	@OneToOne(targetEntity = Contact.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="contact_id",referencedColumnName = "id")
 	private Contact contact;
 
 	public int getId() {

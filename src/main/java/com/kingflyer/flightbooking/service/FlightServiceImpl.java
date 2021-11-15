@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kingflyer.flightbooking.dao.FlightDao;
 import com.kingflyer.flightbooking.dao.LocationDao;
@@ -12,6 +13,7 @@ import com.kingflyer.flightbooking.entity.Flight;
 import com.kingflyer.flightbooking.entity.Location;
 import com.kingflyer.flightbooking.exceptions.RecordNotFoundException;
 
+@Service
 public class FlightServiceImpl implements FlightService {
 
 	@Autowired

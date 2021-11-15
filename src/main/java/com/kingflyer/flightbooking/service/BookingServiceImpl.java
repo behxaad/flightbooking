@@ -3,6 +3,7 @@ package com.kingflyer.flightbooking.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kingflyer.flightbooking.dao.BookingDao;
 import com.kingflyer.flightbooking.dao.FlightDao;
@@ -11,6 +12,7 @@ import com.kingflyer.flightbooking.entity.Booking;
 import com.kingflyer.flightbooking.entity.Flight;
 import com.kingflyer.flightbooking.entity.Passenger;
 
+@Service
 public class BookingServiceImpl implements BookingService {
 
 	@Autowired

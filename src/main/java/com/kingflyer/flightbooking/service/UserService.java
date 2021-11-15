@@ -15,6 +15,5 @@ public interface UserService {
 	public List<HashMap<String, String>> getHistory(int userId);
 	public boolean checkLogin(String email, String password);
 	public User getUser(String email);
-	public boolean addContact(Contact contact);
 
 }

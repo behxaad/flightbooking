@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.kingflyer.flightbooking.dao.ContactDao;
 import com.kingflyer.flightbooking.dao.UserDao;
@@ -15,12 +14,11 @@ import com.kingflyer.flightbooking.entity.User;
 import com.kingflyer.flightbooking.exceptions.RecordAlreadyPresentException;
 import com.kingflyer.flightbooking.exceptions.RecordNotFoundException;
 
+@Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
-	@Autowired
-	private ContactDao contactDao;
 
 	@Override
 	public boolean addUser(User user) {
@@ -32,7 +30,7 @@ public class UserServiceImpl implements UserService {
 		}
 
 		else
-			throw new RecordAlreadyPresentException("User with Id:" + user.getId() + "Already Exist");
+			throw new RecordAlreadyPresentException("User with Id:" + user.getId() + " Already Exist");
 	}
 
 	@Override
@@ -82,11 +80,5 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	@Override
-	public boolean addContact(Contact contact) {
-
-		contactDao.save(contact);
-		return true;
-	}
 
 }
