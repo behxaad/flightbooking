@@ -2,16 +2,24 @@ package com.kingflyer.flightbooking.dao;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
 import com.kingflyer.flightbooking.entity.Flight;
 import com.kingflyer.flightbooking.entity.Location;
 
-public interface FlightDao {
+public interface FlightDao extends CrudRepository<Flight, Integer> {
 	
-	public boolean createFlight(Flight flight);
-	public List<Flight> searchFlight(Location departureLocation, Location arrivalLocation, Date travelDate);
-	public Flight getFlight(int flightId);
-	public boolean updateRemainingSeats(int flightId);
-	public List<Flight> getAllFlight();
+//	public boolean createFlight(Flight flight);
+	@Query(value="SELECT * FROM Flight WHERE departureLocation=?1 AND arrivalLocation=?2 AND travedDate=?3", nativeQuery=true)
+	public List<Flight> searchFlight(Optional<Location> source, Optional<Location> destination, Date travelDate);
+	
+	@Query(value="SELECT * FROM FLIGHT WHERE id=?1", nativeQuery = true)
+	public Flight findByFlightId(int flightId);
+//	public Flight getFlight(int flightId);
+//	public boolean updateRemainingSeats(int flightId);
+//	public List<Flight> getAllFlight();
 
 }

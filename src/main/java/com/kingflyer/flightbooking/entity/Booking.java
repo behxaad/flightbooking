@@ -17,6 +17,8 @@ public class Booking implements Serializable {
 	private Date bookingDate;
 	private Date travelDate;
 	private double totalCost;
+	private int seatsBooked;
+	private String seatClass;
 	@ManyToOne
 	private Flight flightBooked;
 
@@ -58,6 +60,24 @@ public class Booking implements Serializable {
 
 	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
+	}
+	
+	
+
+	public int getSeatsBooked() {
+		return seatsBooked;
+	}
+
+	public void setSeatsBooked(int seatsBooked) {
+		this.seatsBooked = seatsBooked;
+	}
+
+	public String getSeatClass() {
+		return seatClass;
+	}
+
+	public void setSeatClass(String seatClass) {
+		this.seatClass = seatClass;
 	}
 
 	public Flight getFlightBooked() {

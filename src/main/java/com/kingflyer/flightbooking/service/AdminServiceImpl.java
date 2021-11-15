@@ -1,8 +1,11 @@
 package com.kingflyer.flightbooking.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.kingflyer.flightbooking.dao.FareDao;
 import com.kingflyer.flightbooking.dao.FleetDao;
@@ -12,6 +15,8 @@ import com.kingflyer.flightbooking.entity.Fare;
 import com.kingflyer.flightbooking.entity.Fleet;
 import com.kingflyer.flightbooking.entity.Flight;
 import com.kingflyer.flightbooking.entity.Location;
+import com.kingflyer.flightbooking.exceptions.RecordAlreadyPresentException;
+import com.kingflyer.flightbooking.exceptions.RecordNotFoundException;
 
 public class AdminServiceImpl implements AdminService {
 
@@ -26,86 +31,128 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public boolean addFlight(Flight flight) {
-		// TODO Auto-generated method stub
-		return flightDao.createFlight(flight);
+
+		Optional<Flight> checkFlight = flightDao.findById(flight.getId());
+		if (!checkFlight.isPresent()) {
+			flightDao.save(flight);
+			return true;
+		}
+
+		else
+			throw new RecordAlreadyPresentException("Flight with Id: " + flight.getId() + " already exists");
+
 	}
 
 	@Override
 	public boolean deleteFlight(int flightId) {
-		// TODO Auto-generated method stub
-		return flightDao.updateRemainingSeats(flightId);
+
+		Optional<Flight> findById = flightDao.findById(flightId);
+		if (findById.isPresent()) {
+			flightDao.deleteById(flightId);
+			return true;
+		} else
+			throw new RecordNotFoundException("Flight with Id: " + flightId + " not exists");
+
 	}
 
 	@Override
 	public List<Flight> getAllFlights() {
-		// TODO Auto-generated method stub
-		return flightDao.getAllFlight();
+
+		return (List<Flight>) flightDao.findAll();
 	}
 
 	@Override
 	public boolean addFleet(Fleet fleet) {
-		// TODO Auto-generated method stub
-		return fleetDao.createFleet(fleet);
+
+		Optional<Flight> checkFleet = flightDao.findById(fleet.getId());
+		if (!checkFleet.isPresent()) {
+			fleetDao.save(fleet);
+			return true;
+		}
+
+		else
+			throw new RecordAlreadyPresentException("Fleet with Id: " + fleet.getId() + " already exists");
 	}
 
 	@Override
 	public boolean modifyFleet(Fleet fleet) {
-		// TODO Auto-generated method stub
-		return fleetDao.modifyFleet(fleet);
+
+		fleetDao.save(fleet);
+		return true;
 	}
 
 	@Override
 	public boolean deleteFleet(int fleetId) {
-		// TODO Auto-generated method stub
-		return fleetDao.deleteFleet(fleetId);
+		Optional<Fleet> checkFleet = fleetDao.findById(fleetId);
+
+		if (checkFleet.isPresent()) {
+			fleetDao.deleteById(fleetId);
+			return true;
+
+		}
+
+		throw new RecordNotFoundException("Fleet with Id: " + fleetId + " not exists");
+
 	}
 
 	@Override
 	public List<Fleet> getAllFleets() {
-		// TODO Auto-generated method stub
-		return fleetDao.getAllFleet();
+
+		return (List<Fleet>) fleetDao.findAll();
 	}
 
 	@Override
 	public boolean addfare(Fare fare) {
-		// TODO Auto-generated method stub
-		return fareDao.createFare(fare);
+		fareDao.save(fare);
+		return true;
 	}
 
 	@Override
 	public boolean modifyFare(Fare fare) {
-		// TODO Auto-generated method stub
-		return fareDao.modifyFare(fare);
+
+		return fareDao.save(fare) != null;
 	}
 
 	@Override
 	public List<Fare> getAllFares(Fare fare) {
-		// TODO Auto-generated method stub
-		return fareDao.getAllFare();
+
+		return (List<Fare>) fareDao.findAll();
 	}
 
 	@Override
 	public boolean addLocation(Location location) {
-		// TODO Auto-generated method stub
-		return locationDao.createLocation(location);
+
+		Optional<Location> checkLocation = locationDao.findById(location.getId());
+		if (!checkLocation.isPresent()) {
+			locationDao.save(location);
+			return true;
+		}
+
+		else
+			throw new RecordAlreadyPresentException("Location with Id: " + location.getId() + " already exists");
 	}
 
 	@Override
 	public boolean modifyLocation(Location location) {
-		// TODO Auto-generated method stub
-		return locationDao.modifyLocation(location);
+
+		return locationDao.save(location) != null;
 	}
 
 	@Override
 	public boolean deleteLocation(int locationId) {
-		// TODO Auto-generated method stub
-		return locationDao.deleteLocation(locationId);
+		Optional<Location> checkLocation = locationDao.findById(locationId);
+		if (checkLocation.isPresent()) {
+			fleetDao.deleteById(locationId);
+			return true;
+		}
+
+		throw new RecordNotFoundException("Location with Id: " + locationId + " not exists");
 	}
 
 	@Override
 	public List<Location> getAllLocations() {
-		// TODO Auto-generated method stub
-		return locationDao.getAllLocation();
+
+		return (List<Location>) locationDao.findAll();
 	}
 
 }

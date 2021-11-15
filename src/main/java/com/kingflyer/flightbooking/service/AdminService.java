@@ -2,6 +2,8 @@ package com.kingflyer.flightbooking.service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 import com.kingflyer.flightbooking.entity.Fare;
 import com.kingflyer.flightbooking.entity.Fleet;
 import com.kingflyer.flightbooking.entity.Flight;
