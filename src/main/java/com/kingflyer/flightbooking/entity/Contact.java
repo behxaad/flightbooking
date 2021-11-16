@@ -2,10 +2,9 @@ package com.kingflyer.flightbooking.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+
 
 @Entity
 public class Contact implements Serializable {

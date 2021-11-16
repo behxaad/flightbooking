@@ -8,8 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Flight implements Serializable {
@@ -18,21 +19,23 @@ public class Flight implements Serializable {
 	@Id
 	private int id;
 	@ManyToOne(targetEntity = Location.class, cascade = CascadeType.ALL)
-	@JoinColumn(name="departureId", referencedColumnName = "id")
+	@JoinColumn(name = "departureId", referencedColumnName = "id")
 	private Location departureLocation;
 	@ManyToOne(targetEntity = Location.class, cascade = CascadeType.ALL)
-	@JoinColumn(name="arrivalId", referencedColumnName = "id")
+	@JoinColumn(name = "arrivalId", referencedColumnName = "id")
 	private Location arrivalLocation;
 	@OneToOne(targetEntity = Fleet.class, cascade = CascadeType.ALL)
-	@JoinColumn(name="fleetId",referencedColumnName="id")
+	@JoinColumn(name = "fleetId", referencedColumnName = "id")
 	private Fleet fleet;
 	private int remainingEconomySeats;
 	private int remainingPremiumSeats;
 	private int remainingBusinessSeats;
 	private Date departureTime;
 	private Date arrivalTime;
+	@Temporal(TemporalType.DATE)
+	private Date travelDate;
 	@OneToOne(targetEntity = Fare.class, cascade = CascadeType.ALL)
-	@JoinColumn(name="fareId",referencedColumnName="id")
+	@JoinColumn(name = "fareId", referencedColumnName = "id")
 	private Fare fare;
 
 	public int getId() {
@@ -107,6 +110,14 @@ public class Flight implements Serializable {
 		this.arrivalTime = arrivalTime;
 	}
 
+	public Date getTravelDate() {
+		return travelDate;
+	}
+
+	public void setTravelDate(Date travelDate) {
+		this.travelDate = travelDate;
+	}
+
 	public Fare getFare() {
 		return fare;
 	}
@@ -114,7 +125,5 @@ public class Flight implements Serializable {
 	public void setFare(Fare fare) {
 		this.fare = fare;
 	}
-	
-	
 
 }

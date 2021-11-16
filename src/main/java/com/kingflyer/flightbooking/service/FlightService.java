@@ -10,6 +10,6 @@ public interface FlightService {
 	public List<Flight> getSearchDetails(int sourceId, int destinationId, Date date);
 	public double getFare(int flightId, String classType);
 	public Flight getFlight(int flightId);
-	public List<Flight> getAllFlight();
+	public List<Flight> getAllFlights();
 
 }

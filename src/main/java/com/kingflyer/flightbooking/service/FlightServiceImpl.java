@@ -23,16 +23,22 @@ public class FlightServiceImpl implements FlightService {
 
 	@Override
 	public List<Flight> getSearchDetails(int sourceId, int destinationId, Date date) {
-		// TODO Auto-generated method stub
-		Optional<Location> source = locationDao.findById(sourceId);
-		Optional<Location> destination = locationDao.findById(destinationId);
-		List<Flight> flights = flightDao.searchFlight(source, destination, date);
-		return flights;
+
+		if (locationDao.findById(sourceId).isPresent() && locationDao.findById(destinationId).isPresent()) {
+			Optional<Location> departure = locationDao.findById(sourceId);
+			Optional<Location> arrival = locationDao.findById(destinationId);
+			List<Flight> flights = flightDao.searchFlight(departure, arrival, date);
+			return flights;
+		}
+
+		else
+			throw new RecordNotFoundException("No Record Found");
+
 	}
 
 	@Override
 	public Flight getFlight(int flightId) {
-		// TODO Auto-generated method stub
+
 		Optional<Flight> checkFlight = flightDao.findById(flightId);
 		if (checkFlight.isPresent()) {
 			return checkFlight.get();
@@ -45,7 +51,7 @@ public class FlightServiceImpl implements FlightService {
 
 	@Override
 	public double getFare(int flightId, String classType) {
-		// TODO Auto-generated method stub
+
 		Flight flight = flightDao.findById(flightId).get();
 		if (classType.equalsIgnoreCase("economy")) {
 			return flight.getFare().getEconomyFare();
@@ -61,8 +67,9 @@ public class FlightServiceImpl implements FlightService {
 	}
 
 	@Override
-	public List<Flight> getAllFlight() {
-		// TODO Auto-generated method stub
+	public List<Flight> getAllFlights() {
+
+		System.out.println("flightDao.findAll()");
 		return (List<Flight>) flightDao.findAll();
 	}
 

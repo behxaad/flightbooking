@@ -23,14 +23,14 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 
-	@PostMapping("/addFlight")
+	@PostMapping("/admin/addFlight")
 	@ExceptionHandler(RecordAlreadyPresentException.class)
 	public void addFlight(@RequestBody Flight flight) {
 
 		adminService.addFlight(flight);
 	}
 
-	@DeleteMapping("/deleteFlight/{flightId}")
+	@DeleteMapping("/admin/deleteFlight/{flightId}")
 	@ExceptionHandler(RecordNotFoundException.class)
 	public String deleteFlight(@PathVariable("flightId") int flightId) {
 		if (adminService.deleteFlight(flightId)) {
@@ -38,18 +38,18 @@ public class AdminController {
 		}
 
 		else
-			return "Invalid Fleet Id";
+			return "Invalid Flight Id";
 
 	}
 	
-	@PutMapping("/modifyFlight")
+	@PutMapping("/admin/modifyFlight")
 	@ExceptionHandler(RecordNotFoundException.class)
 	public void modifyFlight(@RequestBody Flight flight)
 	{
 		adminService.modifyFlight(flight);
 	}
 	
-	@GetMapping("/getFlights")
+	@GetMapping("/admin/getFlights")
 	public List<Flight> getAllFlights()
 	{
 		return adminService.getAllFlights();
