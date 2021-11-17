@@ -61,8 +61,10 @@ public class FlightServiceImpl implements FlightService {
 			return flight.getFare().getPremiumFare();
 		}
 
-		else
+		else if(classType.equalsIgnoreCase("business"))
 			return flight.getFare().getBusinessFare();
+		else
+			throw new RecordNotFoundException("Invalid ClassType Entered");
 
 	}
 

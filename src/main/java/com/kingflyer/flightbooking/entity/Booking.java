@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Booking implements Serializable {
@@ -19,9 +18,7 @@ public class Booking implements Serializable {
 	private double totalCost;
 	private int seatsBooked;
 	private String seatClass;
-
-	@ManyToOne
-	private Flight flightBooked;
+	private int flightId;
 
 	public int getId() {
 		return id;
@@ -79,18 +76,19 @@ public class Booking implements Serializable {
 		this.seatClass = seatClass;
 	}
 
+	public int getFlightId() {
+		return flightId;
+	}
+
+	public void setFlightId(int flighId) {
+		this.flightId = flighId;
+	}
+
 	@Override
 	public String toString() {
-		return "Booking [id=" + id + ", bookingNumber=" + bookingNumber + ", totalCost=" + totalCost + "]";
+		return "Booking [id=" + id + ", bookingNumber=" + bookingNumber + ", bookingDate=" + bookingDate
+				+ ", travelDate=" + travelDate + ", totalCost=" + totalCost + ", seatsBooked=" + seatsBooked
+				+ ", seatClass=" + seatClass + ", flightId=" + flightId + "]";
 	}
 
-	public Flight getFlightBooked() {
-		return flightBooked;
-	}
-
-	public void setFlightBooked(Flight flightBooked) {
-		this.flightBooked = flightBooked;
-	}
-	
-	
 }

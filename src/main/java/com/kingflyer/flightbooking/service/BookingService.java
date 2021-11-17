@@ -9,7 +9,7 @@ public interface BookingService {
 	
 	public boolean bookTicket(Booking booking, List<Passenger> passengers);
 	public boolean cancelTicket(int bookingId);
-	public boolean checkSeatAvailability(int flightId, int seatsRequired, String classType);
+	public String checkSeatAvailability(int flightId, int seatsRequired, String classType);
 	public boolean updateSeat(int flightMasterId,int seat,String classType);
 	
 }
