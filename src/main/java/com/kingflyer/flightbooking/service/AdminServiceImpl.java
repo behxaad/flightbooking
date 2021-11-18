@@ -13,6 +13,8 @@ import com.kingflyer.flightbooking.exceptions.RecordNotFoundException;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+	
+	private static String FLIGHT_NOT_FOUND_WITH_ID="Flight with Id: ";
 
 	@Autowired
 	private FlightDao flightDao;
@@ -27,7 +29,7 @@ public class AdminServiceImpl implements AdminService {
 		}
 
 		else
-			throw new RecordAlreadyPresentException("Flight with Id: " + flight.getId() + " already exists");
+			throw new RecordAlreadyPresentException(FLIGHT_NOT_FOUND_WITH_ID+ flight.getId() + " already exists");
 
 	}
 
@@ -39,7 +41,7 @@ public class AdminServiceImpl implements AdminService {
 			flightDao.deleteById(flightId);
 			return true;
 		} else
-			throw new RecordNotFoundException("Flight with Id: " + flightId + " not exists");
+			throw new RecordNotFoundException(FLIGHT_NOT_FOUND_WITH_ID + flightId + " not exists");
 
 	}
 
@@ -56,7 +58,7 @@ public class AdminServiceImpl implements AdminService {
 			flightDao.save(flight);
 			
 		} else
-			throw new RecordNotFoundException("Flight with Id: " + flight.getId() + " not exists!!");
+			throw new RecordNotFoundException(FLIGHT_NOT_FOUND_WITH_ID + flight.getId() + " not exists!!");
 		return flight;
 	}
 

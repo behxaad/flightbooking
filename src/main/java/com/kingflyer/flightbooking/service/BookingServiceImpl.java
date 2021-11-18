@@ -17,6 +17,10 @@ import com.kingflyer.flightbooking.exceptions.RecordNotFoundException;
 @Service
 public class BookingServiceImpl implements BookingService {
 
+	private static String TICKETS_NOT_AVAILABLE = "Tickets Not Available";
+	private static String SEATS_AVAILABLE = "Seats Available ";
+	private static String SORRY = "Sorry ";
+
 	@Autowired
 	private BookingDao bookingDao;
 	@Autowired
@@ -28,25 +32,21 @@ public class BookingServiceImpl implements BookingService {
 	public boolean bookTicket(Booking booking, List<Passenger> passengers) {
 		Optional<Flight> checkFlight = flightDao.findById(booking.getFlightId());
 
-		if (checkFlight.isPresent()) {
+		if (updateSeat(booking.getFlightId(), booking.getSeatsBooked(), booking.getSeatClass())
+				&& checkFlight.isPresent()) {
+			Booking newBooking = booking;
+			List<Passenger> newPassenger = passengers;
 
-			if (updateSeat(booking.getFlightId(), booking.getSeatsBooked(), booking.getSeatClass())) {
-				Booking newBooking = booking;
-				List<Passenger> newPassenger = passengers;
-
-				for (int i = 0; i < passengers.size(); i++) {
-					System.out.println("Hi");
-					passengerDao.save(newPassenger.get(i));
-					System.out.println("Bye");
-				}
-
-				bookingDao.save(newBooking);
-
-				return true;
-
+			for (int i = 0; i < passengers.size(); i++) {
+				passengerDao.save(newPassenger.get(i));
 			}
+
+			bookingDao.save(newBooking);
+
+			return true;
+
 		}
-		throw new RecordNotFoundException("Tickets Not Available");
+		throw new RecordNotFoundException(TICKETS_NOT_AVAILABLE);
 
 	}
 
@@ -57,7 +57,7 @@ public class BookingServiceImpl implements BookingService {
 		if (checkBooking.isPresent()) {
 			Booking booking = bookingDao.findByBookingId(bookingId);
 			Flight flight = flightDao.findFlightById(booking.getFlightId());
-			Passenger passenger = passengerDao.findByBookingNumber((int)booking.getBookingNumber());
+			Passenger passenger = passengerDao.findByBookingNumber((int) booking.getBookingNumber());
 			if (flight != null) {
 				String classType = booking.getSeatClass();
 				int seats = booking.getSeatsBooked();
@@ -69,7 +69,7 @@ public class BookingServiceImpl implements BookingService {
 					flight.setRemainingPremiumSeats(flight.getRemainingPremiumSeats() + seats);
 
 				flightDao.save(flight);
-				passengerDao.deleteById(passenger.getId());;
+				passengerDao.deleteById(passenger.getId());
 				bookingDao.deleteById(bookingId);
 				return true;
 			}
@@ -81,24 +81,23 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public String checkSeatAvailability(int flightId, int seatsRequired, String classType) {
-		Optional<Flight> checkFlight = flightDao.findById(flightId);
-		if (checkFlight.isPresent()) {
-			Flight flight = flightDao.findFlightById(flightId);
+		Optional<Flight> flight = flightDao.findById(flightId);
+		if (flight.isPresent()) {
 			if (classType.equalsIgnoreCase("economy")) {
-				if (flight.getRemainingEconomySeats() >= seatsRequired) {
-					return "Seats Available";
-				} else
-					return "Sorry only " + flight.getRemainingEconomySeats() + " Seats Available";
+				if (flight.get().getRemainingEconomySeats() >= seatsRequired) {
+					return SEATS_AVAILABLE;
+				} 
+					return SORRY + flight.get().getRemainingEconomySeats() + " " + SEATS_AVAILABLE;
 			} else if (classType.equalsIgnoreCase("business")) {
-				if (flight.getRemainingBusinessSeats() >= seatsRequired) {
+				if (flight.get().getRemainingBusinessSeats() >= seatsRequired) {
 					return "Seats Available";
-				} else
-					return "Sorry only " + flight.getRemainingBusinessSeats() + " Seats Available";
+				} 
+					return SORRY + flight.get().getRemainingBusinessSeats() + " " + SEATS_AVAILABLE;
 			} else if (classType.equalsIgnoreCase("premium")) {
-				if (flight.getRemainingPremiumSeats() >= seatsRequired) {
+				if (flight.get().getRemainingPremiumSeats() >= seatsRequired) {
 					return "Seats Available";
-				} else
-					return "Sorry only " + flight.getRemainingPremiumSeats() + " Seats Available";
+				} 
+					return SORRY + flight.get().getRemainingPremiumSeats() + " " + SEATS_AVAILABLE;
 			}
 		}
 		throw new RecordNotFoundException("No Record Found");
@@ -114,7 +113,7 @@ public class BookingServiceImpl implements BookingService {
 				if (flight.getRemainingEconomySeats() >= seat) {
 					flight.setRemainingEconomySeats(flight.getRemainingEconomySeats() - seat);
 					return true;
-				} else
+				} 
 					return false;
 			}
 
@@ -122,7 +121,7 @@ public class BookingServiceImpl implements BookingService {
 				if (flight.getRemainingPremiumSeats() >= seat) {
 					flight.setRemainingPremiumSeats(flight.getRemainingPremiumSeats() - seat);
 					return true;
-				} else
+				} 
 					return false;
 			}
 
@@ -130,7 +129,7 @@ public class BookingServiceImpl implements BookingService {
 				if (flight.getRemainingBusinessSeats() >= seat) {
 					flight.setRemainingBusinessSeats(flight.getRemainingBusinessSeats() - seat);
 					return true;
-				} else
+				} 
 					return false;
 			}
 

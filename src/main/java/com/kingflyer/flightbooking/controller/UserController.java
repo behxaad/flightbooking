@@ -51,7 +51,7 @@ public class UserController {
 		}
 		
 		else
-			return "Invalid Crediantials";
+			return "Invalid Credentials";
 	}
 		
 

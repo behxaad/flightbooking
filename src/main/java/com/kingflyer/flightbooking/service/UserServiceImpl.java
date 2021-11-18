@@ -1,7 +1,5 @@
 package com.kingflyer.flightbooking.service;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,7 @@ import com.kingflyer.flightbooking.exceptions.RecordNotFoundException;
 
 @Service
 public class UserServiceImpl implements UserService {
+	private static final String USER_NOT_FOUND="User Not Found";
 
 	@Autowired
 	private UserDao userDao;
@@ -43,28 +42,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<HashMap<String, String>> getHistory(int userId) {
-
-		return null;
-
-	}
-
-	@Override
 	public boolean checkLogin(String email, String password) {
 
 		User user = userDao.findByEmail(email);
-		if (user != null) {
-			String userPass = user.getPassword();
-			if (userPass.equals(password)) {
-				return true;
-			}
-
-			else
-				return false;
+		if (user != null && user.getPassword().equals(password)) {
+			return true;
 		}
+		
+		throw new RecordNotFoundException(USER_NOT_FOUND);
 
-		else
-			return false;
 	}
 
 	@Override
@@ -77,6 +63,5 @@ public class UserServiceImpl implements UserService {
 			throw new RecordNotFoundException("No record found with Email: " + email);
 
 	}
-
 
 }

@@ -38,6 +38,10 @@ public class Flight implements Serializable {
 	@JoinColumn(name = "fareId", referencedColumnName = "id")
 	private Fare fare;
 
+	public Flight() {
+		super();
+	}
+
 	public int getId() {
 		return id;
 	}

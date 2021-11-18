@@ -15,6 +15,8 @@ import com.kingflyer.flightbooking.exceptions.RecordNotFoundException;
 
 @Service
 public class FlightServiceImpl implements FlightService {
+	
+	private static String FLIGHT_NOT_FOUND_WITH_ID="Flight with Id: ";
 
 	@Autowired
 	private FlightDao flightDao;
@@ -27,8 +29,7 @@ public class FlightServiceImpl implements FlightService {
 		if (locationDao.findById(sourceId).isPresent() && locationDao.findById(destinationId).isPresent()) {
 			Optional<Location> departure = locationDao.findById(sourceId);
 			Optional<Location> arrival = locationDao.findById(destinationId);
-			List<Flight> flights = flightDao.searchFlight(departure, arrival, date);
-			return flights;
+			return flightDao.searchFlight(departure, arrival, date);
 		}
 
 		else
@@ -45,33 +46,40 @@ public class FlightServiceImpl implements FlightService {
 		}
 
 		else
-			throw new RecordNotFoundException("Flight with Id: " + flightId + " not exists");
+			throw new RecordNotFoundException(FLIGHT_NOT_FOUND_WITH_ID + flightId + " not exists");
 
 	}
 
 	@Override
 	public double getFare(int flightId, String classType) {
 
-		Flight flight = flightDao.findById(flightId).get();
+		Optional<Flight> flight = flightDao.findById(flightId);
+		
+		if(flight.isPresent())
+		{
 		if (classType.equalsIgnoreCase("economy")) {
-			return flight.getFare().getEconomyFare();
+			return flight.get().getFare().getEconomyFare();
 		}
 
 		else if (classType.equalsIgnoreCase("premium")) {
-			return flight.getFare().getPremiumFare();
+			return flight.get().getFare().getPremiumFare();
 		}
 
 		else if(classType.equalsIgnoreCase("business"))
-			return flight.getFare().getBusinessFare();
+			return flight.get().getFare().getBusinessFare();
 		else
 			throw new RecordNotFoundException("Invalid ClassType Entered");
+		}
+		
+		else
+			throw new RecordNotFoundException(FLIGHT_NOT_FOUND_WITH_ID + flightId + " not exists");
+		
 
 	}
 
 	@Override
 	public List<Flight> getAllFlights() {
 
-		System.out.println("flightDao.findAll()");
 		return (List<Flight>) flightDao.findAll();
 	}
 

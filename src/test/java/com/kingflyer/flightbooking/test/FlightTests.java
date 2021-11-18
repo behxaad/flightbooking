@@ -25,7 +25,7 @@ class FlightTests {
 	
 
 	@Test
-	public void addUser() {
+	private void addUser() {
 
 		User user = new User();
 		user.setId(3);
@@ -59,7 +59,7 @@ class FlightTests {
 	
 	
 	 @Test
-	 public void addFlight()
+	 private void addFlight()
 	 {
 		 Flight flight = new Flight();
 		 flight.setId(1);

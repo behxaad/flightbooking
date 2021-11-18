@@ -24,8 +24,7 @@ public class BookingController {
 	@ExceptionHandler(RecordNotFoundException.class)
 	public String checkSeatAvailability(@PathVariable int flightId, @PathVariable int seatsRequired,
 			@PathVariable String classType) {
-		String availability = bookingService.checkSeatAvailability(flightId, seatsRequired, classType);
-		return availability;
+		return bookingService.checkSeatAvailability(flightId, seatsRequired, classType);
 	}
 
 	@PostMapping("/booking/bookTicket")

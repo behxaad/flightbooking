@@ -4,8 +4,8 @@ import java.util.List;
 
 public class CreateBooking {
 
-	public Booking booking;
-	public List<Passenger> passengers;
+	private Booking booking;
+	private List<Passenger> passengers;
 	public Booking getBooking() {
 		return booking;
 	}
